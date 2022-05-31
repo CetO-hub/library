@@ -14,15 +14,43 @@
     </header>
     <div class="container">
       <div class="book-grid">
-        <div class="card">
-          <input type="text" name="" id="title" />
-          <label for="title"></label>
-        </div>
         <div class="card"></div>
         <button class="add-book" type="submit">Add Book</button>
       </div>
     </div>
     <footer>Designed by CetO-Hub</footer>
     <div class="overlay"></div>
+    <div class="book-form-container">
+      <h2>Add a new book</h2>
+      <form class="book-form" action="">
+        <div class="input-text">
+          <label for="author">Author</label>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            placeholder="Alexander Sergejewitsch Puschkin"
+          />
+        </div>
+        <div class="input-text">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" placeholder="Russalka" />
+        </div>
+        <div class="input-text">
+          <label for="pages">Pages</label>
+          <input type="number" name="pages" id="pages" placeholder="57" />
+        </div>
+        <div class="book-read">
+          <h2>Have you read the book?</h2>
+          <input
+            class="checkbox"
+            type="checkbox"
+            name="checkbox"
+            id="book-read"
+          />
+        </div>
+        <button class="submit-book" type="submit">Submit</button>
+      </form>
+    </div>
   </body>
 </html>

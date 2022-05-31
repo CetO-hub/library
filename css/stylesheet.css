@@ -34,12 +34,21 @@ header {
 .book-grid {
   height: 100%;
   background-color: var(--wedgewood-500);
-  padding: 20px;
+  padding: 30px;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: minmax(200px, 400px);
   gap: 10px;
+}
+
+.add-book {
+  margin-left: 10px;
+}
+
+.add-book:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .card {
@@ -52,10 +61,6 @@ header {
   font-size: 2rem;
   transition: ease-in-out 0.3s;
   border: none;
-}
-
-.book-grid button:hover {
-  transform: rotateY(360deg);
 }
 
 footer {
@@ -73,6 +78,7 @@ footer {
 
   display: none;
   height: 100%;
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -80,4 +86,73 @@ footer {
 
 .overlay.active {
   display: block;
+}
+
+.book-form-container {
+  background-color: var(--wedgewood-100);
+  padding: 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+
+  z-index: 1;
+  position: fixed;
+  transform: translate(-50%, -50%) scale(0);
+  transition: ease-in 0.1s;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+}
+
+.book-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.book-form-container.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.book-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-text {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  font-weight: bold;
+  gap: 5px;
+}
+
+.book-form input[placeholder] {
+  font-style: italic;
+  padding: 5px;
+}
+
+.book-read {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin: 10px 0;
+}
+
+.checkbox {
+  width: 27px;
+  height: 27px;
+  margin-left: 5px;
+}
+
+.submit-book {
+  padding: 20px;
+  color: var(--wedgewood-50);
+  background-color: var(--wedgewood-400);
+  border-radius: 15px;
+
+  cursor: pointer;
+}
+
+.submit-book:hover {
+  filter: brightness(80%);
+  transition: ease-in-out;
 }
