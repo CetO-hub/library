@@ -40,7 +40,16 @@ header {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: minmax(200px, 450px);
-  gap: 10px;
+  gap: 13px;
+}
+
+.add-book {
+  background-color: var(--wedgewood-800);
+  color: var(--wedgewood-50);
+  font-size: 2rem;
+  transition: ease-in-out 0.3s;
+  border: none;
+  box-shadow: 0 0 7px 5px rgb(248, 248, 248, 0.4);
 }
 
 .add-book:hover {
@@ -56,6 +65,7 @@ header {
   align-items: center;
   justify-content: space-between;
   background-color: var(--wedgewood-800);
+  box-shadow: 0 0 7px 5px rgb(248, 248, 248, 0.4);
 }
 
 .card-book-head {
@@ -80,21 +90,25 @@ header {
 }
 
 .card-book-read {
-  background-color: var(--wedgewood-200);
+  background-color: rgb(0, 255, 0);
   max-height: 100%;
   color: var(--wedgewood-700);
   border-radius: 10px;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: bold;
   padding: 5px;
+  cursor: pointer;
 }
 
-.book-grid button {
-  background-color: var(--wedgewood-800);
+.card-book-not-read {
+  background-color: red;
+  max-height: 100%;
   color: var(--wedgewood-50);
-  font-size: 2rem;
-  transition: ease-in-out 0.3s;
-  border: none;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 5px;
+  cursor: pointer;
 }
 
 footer {

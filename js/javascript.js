@@ -32,7 +32,7 @@ const createBookGrid = (book) => {
   const createTitle = document.createElement("p");
   const createPagesHead = document.createElement("p");
   const createPages = document.createElement("p");
-  const isRead = document.createElement("p");
+  const isRead = document.createElement("button");
 
   createAuthorHead.textContent = "Author";
   createTitleHead.textContent = "Title";
@@ -42,8 +42,10 @@ const createBookGrid = (book) => {
   createPages.textContent = book.pages;
   if (book.read === true) {
     isRead.textContent = "Book read";
+    isRead.classList.add("card-book-read");
   } else {
     isRead.textContent = "Book not read";
+    isRead.classList.add("card-book-not-read");
   }
   createDiv.appendChild(createAuthorHead);
   createDiv.appendChild(createAuthor);
@@ -55,7 +57,6 @@ const createBookGrid = (book) => {
   isBookGrid.appendChild(createDiv);
   addBookButton.parentNode.insertBefore(createDiv, addBookButton);
   createDiv.classList.add("card");
-  isRead.classList.add("card-book-read");
 
   createAuthorHead.classList.add("card-book-head");
   createTitleHead.classList.add("card-book-head");
@@ -63,6 +64,16 @@ const createBookGrid = (book) => {
   createAuthor.classList.add("card-book");
   createTitle.classList.add("card-book");
   createPages.classList.add("card-book");
+};
+
+const toggleReadStatus = (event) => {
+  if (event.target.textContent === "Book read") {
+    event.target.textContent = "Book not read";
+    event.target.className = "card-book-not-read";
+  } else {
+    event.target.textContent = "Book read";
+    event.target.className = "card-book-read";
+  }
 };
 
 // Functions
@@ -110,3 +121,12 @@ document.addEventListener("keydown", (e) => {
 });
 
 submitBook.addEventListener("click", addBookToLibrary);
+document.body.addEventListener("click", (event) => {
+  if (
+    event.target.className == "card-book-read" ||
+    event.target.className == "card-book-not-read"
+  ) {
+    toggleReadStatus(event);
+  }
+  return;
+});
