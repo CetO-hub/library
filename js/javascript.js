@@ -6,7 +6,8 @@ const isOverlay = document.querySelector(".overlay");
 const isBookFormContainer = document.querySelector(".book-form-container");
 
 // Variables
-const isLibrary = [];
+let isLibrary = [];
+let isCounterID = 0;
 
 // Constructors
 function Book(author, title, pages, read) {
@@ -14,6 +15,7 @@ function Book(author, title, pages, read) {
   this.title = title;
   this.pages = pages;
   this.read = read;
+  this.id = getID();
 }
 
 // DOM manipulation
@@ -33,6 +35,7 @@ const createBookGrid = (book) => {
   const createPagesHead = document.createElement("p");
   const createPages = document.createElement("p");
   const isRead = document.createElement("button");
+  const isRemoveBook = document.createElement("button");
 
   createAuthorHead.textContent = "Author";
   createTitleHead.textContent = "Title";
@@ -40,6 +43,10 @@ const createBookGrid = (book) => {
   createAuthor.textContent = book.author;
   createTitle.textContent = book.title;
   createPages.textContent = book.pages;
+  createDiv.dataset.id = book.id;
+  console.log(createDiv.dataset.id);
+  isRemoveBook.textContent = "Remove Book";
+
   if (book.read === true) {
     isRead.textContent = "Book read";
     isRead.classList.add("card-book-read");
@@ -54,6 +61,7 @@ const createBookGrid = (book) => {
   createDiv.appendChild(createPagesHead);
   createDiv.appendChild(createPages);
   createDiv.appendChild(isRead);
+  createDiv.appendChild(isRemoveBook);
   isBookGrid.appendChild(createDiv);
   addBookButton.parentNode.insertBefore(createDiv, addBookButton);
   createDiv.classList.add("card");
@@ -64,6 +72,7 @@ const createBookGrid = (book) => {
   createAuthor.classList.add("card-book");
   createTitle.classList.add("card-book");
   createPages.classList.add("card-book");
+  isRemoveBook.classList.add("card-remove");
 };
 
 const toggleReadStatus = (event) => {
@@ -74,6 +83,17 @@ const toggleReadStatus = (event) => {
     event.target.textContent = "Book read";
     event.target.className = "card-book-read";
   }
+};
+
+const removeBook = (event) => {
+  const isID = event.target.parentNode.getAttribute("data-id");
+  isLibrary = isLibrary.filter((book) => book.id != isID);
+  console.log(isLibrary);
+  updateDisplayLibrary(isLibrary);
+};
+
+const getID = () => {
+  return (isCounterID += 1);
 };
 
 // Functions
@@ -95,14 +115,21 @@ const removeActive = () => {
 
 const addBookToLibrary = (e) => {
   e.preventDefault();
-  removeActive();
-  let isAuthor = document.querySelector("#author").value;
-  let isTitle = document.querySelector("#title").value;
-  let isPages = document.querySelector("#pages").value;
-  let isRead = document.querySelector("#book-read").checked;
-  let newBook = new Book(isAuthor, isTitle, isPages, isRead);
-  isLibrary.push(newBook);
-  updateDisplayLibrary(isLibrary);
+  let isValid = document.querySelector(".book-form").checkValidity();
+  if (!isValid) {
+    document.querySelector(".book-form").reportValidity();
+  } else {
+    removeActive();
+    const isAuthor = document.querySelector("#author").value;
+    const isTitle = document.querySelector("#title").value;
+    const isPages = document.querySelector("#pages").value;
+    const isRead = document.querySelector("#book-read").checked;
+
+    let newBook = new Book(isAuthor, isTitle, isPages, isRead);
+    isLibrary.push(newBook);
+    console.log(isLibrary);
+    updateDisplayLibrary(isLibrary);
+  }
 };
 
 // Event listeners
@@ -120,7 +147,10 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-submitBook.addEventListener("click", addBookToLibrary);
+submitBook.addEventListener("click", (e) => {
+  addBookToLibrary(e);
+});
+
 document.body.addEventListener("click", (event) => {
   if (
     event.target.className == "card-book-read" ||
@@ -129,4 +159,10 @@ document.body.addEventListener("click", (event) => {
     toggleReadStatus(event);
   }
   return;
+});
+
+document.body.addEventListener("click", (event) => {
+  if (event.target.className == "card-remove") {
+    removeBook(event);
+  }
 });
