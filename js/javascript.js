@@ -88,7 +88,6 @@ const toggleReadStatus = (event) => {
 const removeBook = (event) => {
   const isID = event.target.parentNode.getAttribute("data-id");
   isLibrary = isLibrary.filter((book) => book.id != isID);
-  console.log(isLibrary);
   updateDisplayLibrary(isLibrary);
 };
 
@@ -127,7 +126,6 @@ const addBookToLibrary = (e) => {
 
     let newBook = new Book(isAuthor, isTitle, isPages, isRead);
     isLibrary.push(newBook);
-    console.log(isLibrary);
     updateDisplayLibrary(isLibrary);
   }
 };
