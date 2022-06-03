@@ -44,7 +44,6 @@ const createBookGrid = (book) => {
   createTitle.textContent = book.title;
   createPages.textContent = book.pages;
   createDiv.dataset.id = book.id;
-  console.log(createDiv.dataset.id);
   isRemoveBook.textContent = "Remove Book";
 
   if (book.read === true) {
