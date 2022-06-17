@@ -10,12 +10,14 @@ let isLibrary = [];
 let isCounterID = 0;
 
 // Constructors
-function Book(author, title, pages, read) {
-  this.author = author;
-  this.title = title;
-  this.pages = pages;
-  this.read = read;
-  this.id = getID();
+class Book {
+  constructor(author, title, pages, read) {
+    this.author = author;
+    this.title = title;
+    this.pages = pages;
+    this.read = read;
+    this.id = getID();
+  }
 }
 
 // DOM manipulation
